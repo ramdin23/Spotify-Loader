@@ -62,13 +62,13 @@ else:
     OWNER_FILTER = filters.incoming
     
 # Start message
-@xbot.on_message(filters.command('start') & OWNER_FILTER & filters.private)
+@Mbot.on_message(filters.command('start') & OWNER_FILTER & filters.private)
 async def start(bot, update):
     if db:
         if not await is_user_exist(update.from_user.id):
             await add_user(id=update.from_user.id, output_format='mp3', use_youtube="False", path_template='{artist}/{album}/{artist} - {title}.{ext}')
     await update.reply('I\'m Spotify-Loader\nYou can download spotify playlist/artist/album/track music using this bot!', True, reply_markup=InlineKeyboardMarkup(START_BUTTONS))
-@xbot.on_message(filters.command('help') & OWNER_FILTER & filters.private)
+@Mbot.on_message(filters.command('help') & OWNER_FILTER & filters.private)
 async def help(bot, update):
     if db:
         if not await is_user_exist(update.from_user.id):
