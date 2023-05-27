@@ -5,7 +5,7 @@ from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery
 from pyrogram.errors import BadRequest, FloodWait
 from motor import motor_asyncio
-from mbot import MONGODB, OWNER_IDS
+from mbot import MONGODB, OWNER_IDS, Mbot as xbot
 
 
 if MONGODB:
@@ -135,7 +135,7 @@ async def search(bot, update):
     shutil.rmtree(dirs)
 
     
-    @xbot.on_message(filters.command('settings') & OWNER_FILTER & filters.private)
+@xbot.on_message(filters.command('settings') & OWNER_FILTER & filters.private)
 async def settings(bot, update):
     if db:
         if not await is_user_exist(update.from_user.id):
