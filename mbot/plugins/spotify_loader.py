@@ -5,7 +5,7 @@ from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery
 from pyrogram.errors import BadRequest, FloodWait
 from motor import motor_asyncio
-from mbot import MONGODB, OWNER_IDS, MONGO_DB_URL
+from mbot import MONGODB, OWNER_IDS
 
 
 if MONGODB:
