@@ -1,9 +1,9 @@
 import logging
 from os import environ, mkdir, path, sys
-from dotenv import load_dotenv
+#from dotenv import load_dotenv
 from pyrogram import Client
 
-load_dotenv("config.env")
+#load_dotenv("config.env")
 # Log
 logging.basicConfig(
     level=logging.DEBUG,
