@@ -23,7 +23,7 @@ except KeyError:
     
     
 # Optional Variabl
-MONGODB = os.environ['MONGO_DB_URL']
+MONGODB = os.environ['MONGODB']
 OWNER_IDS = int(environ["OWNER_IDS"])
 AUTH_CHATS = environ.get("AUTH_CHATS", "").split()
 
