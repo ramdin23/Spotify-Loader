@@ -5,7 +5,7 @@ from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery
 from pyrogram.errors import BadRequest, FloodWait
 from motor import motor_asyncio
-from mbot import MONGODB, OWNER_IDS, Mbot as xbot
+from mbot import MONGODB, OWNER_IDS, Mbot
 
 
 if MONGODB:
@@ -86,13 +86,13 @@ Commands:
         reply_markup=InlineKeyboardMarkup(START_BUTTONS),
         parse_mode='markdown'
     )
-@xbot.on_message(filters.regex(r'http.*:[/][/]open[.]spotify[.]com.(track|album|artist|playlist)', re.M) & OWNER_FILTER & filters.private)
+@Mbot.on_message(filters.regex(r'http.*:[/][/]open[.]spotify[.]com.(track|album|artist|playlist)', re.M) & OWNER_FILTER & filters.private)
 async def downloader(bot, update):
     if db:
         if not await is_user_exist(update.from_user.id):
             await add_user(id=update.from_user.id, output_format='mp3', use_youtube="False", path_template='{artist}/{album}/{artist} - {title}.{ext}')
     await update.reply('Select Options Below!', True, reply_markup=InlineKeyboardMarkup(CB_BUTTONS))
-@xbot.on_message(filters.command(['search', 's']) & OWNER_FILTER & filters.private)
+@Mbot.on_message(filters.command(['search', 's']) & OWNER_FILTER & filters.private)
 async def search(bot, update):
     query = update.text.split(' ', 1)[1]
     rndm = uuid.uuid4().hex
@@ -135,7 +135,7 @@ async def search(bot, update):
     shutil.rmtree(dirs)
 
     
-@xbot.on_message(filters.command('settings') & OWNER_FILTER & filters.private)
+@Mbot.on_message(filters.command('settings') & OWNER_FILTER & filters.private)
 async def settings(bot, update):
     if db:
         if not await is_user_exist(update.from_user.id):
@@ -157,7 +157,7 @@ async def settings(bot, update):
         )
     else:
         pass
-@xbot.on_callback_query()
+@Mbot.on_callback_query()
 async def callbacks(bot: Client, updatex: CallbackQuery):
     cb_data = updatex.data
     update = updatex.message.reply_to_message
